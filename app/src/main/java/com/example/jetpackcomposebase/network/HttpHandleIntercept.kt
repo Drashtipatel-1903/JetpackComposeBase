@@ -42,7 +42,7 @@ class HttpHandleIntercept : Interceptor {
         builder.add("Accept", "application/json")
         builder.add("is-mobile", "1")
         builder.add("lang-code", "en")
-        builder.add("Authorization", "Bearer ")
+        builder.add("Authorization", "Bearer")
         return builder.build()
     }
 
