@@ -27,17 +27,12 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var mPref: MyPreference
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackBaseApp(localeManager)
         }
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        // Call localeManager.setLocale(this) to handle locale changes if needed
-        // Make sure to pass 'this' as the activity context
     }
 
     override fun onAttachedToWindow() {

@@ -64,7 +64,7 @@ fun SettingUI(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(stringResource(id = R.string.lbl_setting))
+        Text(stringResource(id = R.string.lbl_select_language))
         Spacer(modifier = Modifier.height(20.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,

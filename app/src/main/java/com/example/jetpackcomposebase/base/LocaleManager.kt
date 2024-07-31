@@ -13,11 +13,16 @@ import com.example.jetpackcomposebase.utils.MyPreference
 import com.example.jetpackcomposebase.utils.PrefKey
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Set Locale in application
  */
-class LocaleManager @Inject constructor(private val mPref: MyPreference) {
+
+class LocaleManager() {
+
+    @Inject
+    lateinit var mPref: MyPreference
 
     @SuppressLint("ObsoleteSdkInt")
     private fun updateResources(context: Context, language: String): Context {

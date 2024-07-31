@@ -16,4 +16,5 @@
     <string name="lbl_real_name">"الاسم الحقيقي : "</string>
     <string name="lbl_actor_name">"اسم الممثل : "</string>
     <string name="lbl_arabic">عربي</string>
+    <string name="lbl_select_language">"اختار اللغة "</string>
 </resources>
