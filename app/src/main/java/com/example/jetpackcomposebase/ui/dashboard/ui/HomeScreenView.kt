@@ -28,6 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.jetpackcomposebase.base.ToolBarData
+import com.example.jetpackcomposebase.network.ResponseHandler
 import com.example.jetpackcomposebase.ui.dashboard.model.MovieCharacter
 import com.example.jetpackcomposebase.ui.dashboard.viewmodel.HomeViewModel
 
@@ -40,7 +41,7 @@ fun HomeScreenView(
     circularProgress: (Boolean) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val state by viewModel.state.collectAsState()
+    val responseHandler by viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
         topBar(
@@ -55,26 +56,36 @@ fun HomeScreenView(
         bottomBarVisibility(true)
     }
 
-
-    LazyColumn {
-        if (state.isEmpty()) {
-            item {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .wrapContentSize(align = Alignment.Center)
-                )
+    when (responseHandler) {
+        is ResponseHandler.Loading -> {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(align = Alignment.Center)
+            )
+        }
+        is ResponseHandler.OnError -> {
+            Text(
+                text = "Error: ${(responseHandler as ResponseHandler.OnError).message}",
+                modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center)
+            )
+        }
+        is ResponseHandler.OnSuccessResponse -> {
+            LazyColumn {
+                items((responseHandler as ResponseHandler.OnSuccessResponse<List<MovieCharacter>>).response) { item ->
+                    HomeUI(character = item)
+                }
             }
         }
-
-        items(state) { item ->
-            HomeUI(character = item)
+        else -> {
+            Text(
+                text = "No data available",
+                modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center)
+            )
         }
-
     }
-
-
 }
+
 
 @Composable
 fun HomeUI(character: MovieCharacter) {

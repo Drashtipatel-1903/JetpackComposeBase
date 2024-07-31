@@ -7,6 +7,6 @@ sealed class ResponseHandler<out T> {
         ResponseHandler<Nothing>()
 
     class OnSuccessResponse<T>(val response: T) : ResponseHandler<T>()
-    class OnError(message: String) : ResponseHandler<Nothing>()
+    class OnError(val message: String) : ResponseHandler<Nothing>()  // Update to use String directly
 
 }

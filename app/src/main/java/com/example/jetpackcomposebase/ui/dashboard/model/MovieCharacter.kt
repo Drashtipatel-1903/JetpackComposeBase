@@ -67,5 +67,4 @@ data class Wand(
 
     @JsonProperty("core")
     val core: String,
-
 )

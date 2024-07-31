@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
+import androidx.activity.ComponentActivity
+import com.example.jetpackcomposebase.MyApp
 import com.example.jetpackcomposebase.utils.DebugLog
 import com.example.jetpackcomposebase.utils.MyPreference
 import com.example.jetpackcomposebase.utils.PrefKey
@@ -17,9 +20,8 @@ import javax.inject.Inject
 class LocaleManager @Inject constructor(private val mPref: MyPreference) {
 
     @SuppressLint("ObsoleteSdkInt")
-    private fun updateResources(context : Context, language: String): Context {
+    private fun updateResources(context: Context, language: String): Context {
         DebugLog.print("languages:$language")
-        var context = context
         val config = context.resources.configuration
         val locale = Locale(language)
         Locale.setDefault(locale)
@@ -30,19 +32,21 @@ class LocaleManager @Inject constructor(private val mPref: MyPreference) {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             config.setLayoutDirection(locale)
-            context = context.createConfigurationContext(config)
+            return context.createConfigurationContext(config)
         } else {
             context.resources.updateConfiguration(config, context.resources.displayMetrics)
+            return context
         }
-        return context
     }
 
-    fun setLocale(context: Context): Context {
-        var languageCode = mPref.getValueString(PrefKey.SELECTED_LANGUAGE, PrefKey.EN_CODE)
-        if (languageCode.isNullOrEmpty()) {
-            languageCode = PrefKey.EN_CODE
+    fun setLocale(activity: ComponentActivity) {
+        val languageCode = MyApp.applicationContext().mPref.getValueString(PrefKey.SELECTED_LANGUAGE, PrefKey.EN_CODE)
+        Locale.setDefault(Locale(languageCode))
+        val config = Configuration(activity.resources.configuration).apply {
+            setLocale(Locale(languageCode))
         }
-        return updateResources(context, languageCode)
+        activity.resources.updateConfiguration(config, activity.resources.displayMetrics)
+        activity.recreate()
     }
 
     fun setNewLocale(context: Context, language: String) {
@@ -60,3 +64,4 @@ class LocaleManager @Inject constructor(private val mPref: MyPreference) {
         activity.startActivity(intent)
     }
 }
+

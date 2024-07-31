@@ -16,6 +16,13 @@
     <string name="lbl_username">Username</string>
     <string name="lbl_password">Password</string>
     <string name="lbl_click_me">Click Me</string>
+    <string name="lbl_english">English</string>
+    <string name="lbl_arabic">Arabic</string>
+
+
+    <string name="lbl_real_name">Real name :</string>
+    <string name="lbl_actor_name">Actor name :</string>
+
 
 
     <string name="drawer_menu_description">Menu navigation button</string>

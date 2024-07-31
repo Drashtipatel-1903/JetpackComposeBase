@@ -2,6 +2,7 @@ package com.example.jetpackcomposebase.network
 
 import com.example.jetpackcomposebase.ui.dashboard.model.MovieCharacter
 import com.example.jetpackcomposebase.ui.login.model.LoginResponse
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 interface ApiInterface {
 
     @GET("characters")
-    suspend fun getCharacter(): List<MovieCharacter>
+    suspend fun getCharacters(): Response<List<MovieCharacter>>
 
     @FormUrlEncoded
     @POST("login")

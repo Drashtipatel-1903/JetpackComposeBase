@@ -3,6 +3,7 @@ package com.example.jetpackcomposebase.ui.dashboard.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpackcomposebase.base.ViewModelBase
 import com.example.jetpackcomposebase.network.ApiInterface
+import com.example.jetpackcomposebase.network.ResponseHandler
 import com.example.jetpackcomposebase.ui.dashboard.model.MovieCharacter
 import com.example.jetpackcomposebase.ui.dashboard.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,8 +18,12 @@ class HomeViewModel @Inject constructor(
     private val apiInterface: ApiInterface
 ) : ViewModelBase() {
 
-    private val _state = MutableStateFlow(emptyList<MovieCharacter>())
+/*    private val _state = MutableStateFlow(emptyList<MovieCharacter>())
     val state: StateFlow<List<MovieCharacter>>
+        get() = _state*/
+
+    private val _state = MutableStateFlow<ResponseHandler<List<MovieCharacter>>>(ResponseHandler.Empty)
+    val state: StateFlow<ResponseHandler<List<MovieCharacter>>>
         get() = _state
 
 

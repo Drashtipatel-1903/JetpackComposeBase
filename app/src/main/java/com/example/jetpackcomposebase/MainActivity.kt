@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -35,44 +36,34 @@ class MainActivity : ComponentActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        localeManager.setLocale(this)
+        // Call localeManager.setLocale(this) to handle locale changes if needed
+        // Make sure to pass 'this' as the activity context
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         val languageCode = mPref.getValueString(PrefKey.SELECTED_LANGUAGE, PrefKey.EN_CODE)
         window.decorView.layoutDirection =
-            if (languageCode!!.contains(PrefKey.AR_CODE)) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+            if (languageCode?.contains(PrefKey.AR_CODE) == true) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     override fun attachBaseContext(base: Context) {
-        DebugLog.e("attachBaseContext")
-        // super.attachBaseContext(base);
-        val languageCode = MyApp.applicationContext().mPref.getValueString(
-            PrefKey.SELECTED_LANGUAGE,
-            PrefKey.EN_CODE
-        )
-        useCustomConfig(base, languageCode)?.let { super.attachBaseContext(it) }
+        val languageCode = mPref.getValueString(PrefKey.SELECTED_LANGUAGE, PrefKey.EN_CODE)
+        super.attachBaseContext(useCustomConfig(base, languageCode))
     }
 
     @SuppressLint("ObsoleteSdkInt")
     private fun useCustomConfig(context: Context, languageCode: String?): Context? {
         Locale.setDefault(Locale(languageCode!!))
-        return if (Build.VERSION.SDK_INT >= 17) {
-//            val config = Configuration()
-            val res: Resources = context.resources
-            val config =
-                Configuration(res.configuration)
-            config.setLocale(Locale(languageCode))
+        val config = Configuration(context.resources.configuration).apply {
+            setLocale(Locale(languageCode))
+        }
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             context.createConfigurationContext(config)
         } else {
-            val res: Resources = context.resources
-            val config =
-                Configuration(res.configuration)
-            config.locale = Locale(languageCode)
-            res.updateConfiguration(config, res.displayMetrics)
+            context.resources.updateConfiguration(config, context.resources.displayMetrics)
             context
         }
     }
-
 }
+

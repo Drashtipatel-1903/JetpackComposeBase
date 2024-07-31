@@ -12,4 +12,8 @@
     <string name="lbl_password">"كلمة المرور "</string>
     <string name="lbl_profile">"حساب تعريفي "</string>
     <string name="lbl_click_me">"انقر فوق لي "</string>
+    <string name="lbl_english">إنجليزي</string>
+    <string name="lbl_real_name">"الاسم الحقيقي : "</string>
+    <string name="lbl_actor_name">"اسم الممثل : "</string>
+    <string name="lbl_arabic">عربي</string>
 </resources>
