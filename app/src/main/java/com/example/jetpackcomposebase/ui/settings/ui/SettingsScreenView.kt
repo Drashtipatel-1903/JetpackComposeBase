@@ -30,11 +30,12 @@ fun SettingScreenView(
 ) {
     val context = LocalContext.current
     val application = context.applicationContext as MyApp
+    val title = stringResource(id = R.string.lbl_setting)  // Get the title from string resources
 
     LaunchedEffect(Unit) {
         topBar(
             ToolBarData(
-                title = "Setting",
+                title = title,
                 isVisible = true,
                 isDrawerIcon = true,
                 isBackIconVisible = false,
