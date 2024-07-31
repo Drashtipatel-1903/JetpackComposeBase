@@ -28,7 +28,7 @@ class MyApp : Application() {
         }
     }
 
-   /* fun updateLocale(context: Context, localeCode: String) {
+    fun updateLocale(context: Context, localeCode: String) {
         val locale = Locale(localeCode)
         Locale.setDefault(locale)
         val config = Configuration(context.resources.configuration).apply {
@@ -44,7 +44,6 @@ class MyApp : Application() {
             context.recreate()
         }
     }
-*/
 
     override fun onCreate() {
         super.onCreate()
