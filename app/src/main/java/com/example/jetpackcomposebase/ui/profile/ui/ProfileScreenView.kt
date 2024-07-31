@@ -29,7 +29,7 @@ fun ProfileScreenView(
     circularProgress: (Boolean) -> Unit,
     settingViewModel: SettingViewModel = hiltViewModel()
 ) {
-    val title = stringResource(id = R.string.lbl_profile)  // Get the title from string resources
+    val title = stringResource(id = R.string.lbl_profile)
 
 
     LaunchedEffect(Unit) {
@@ -62,7 +62,7 @@ fun ProfileUI() {
         Text(
             text = stringResource(id = R.string.lbl_profile),
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.onBackground
         )
 
     }

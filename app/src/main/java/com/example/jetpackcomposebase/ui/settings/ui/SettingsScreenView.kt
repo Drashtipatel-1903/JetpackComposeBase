@@ -1,8 +1,17 @@
 package com.example.jetpackcomposebase.ui.settings.ui
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -13,10 +22,8 @@ import androidx.navigation.NavController
 import com.example.jetpackcomposebase.MyApp
 import com.example.jetpackcomposebase.R
 import com.example.jetpackcomposebase.base.ToolBarData
-import com.example.jetpackcomposebase.navigation.NAV_SPLASH
 import com.example.jetpackcomposebase.ui.custom_compose.CustomButton
 import com.example.jetpackcomposebase.ui.settings.viewmodel.SettingViewModel
-import com.example.jetpackcomposebase.utils.DebugLog
 import com.example.jetpackcomposebase.utils.PrefKey
 
 @Composable
@@ -30,7 +37,7 @@ fun SettingScreenView(
 ) {
     val context = LocalContext.current
     val application = context.applicationContext as MyApp
-    val title = stringResource(id = R.string.lbl_setting)  // Get the title from string resources
+    val title = stringResource(id = R.string.lbl_setting)
 
     LaunchedEffect(Unit) {
         topBar(

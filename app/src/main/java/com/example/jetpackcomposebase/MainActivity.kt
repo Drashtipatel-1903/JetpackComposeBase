@@ -3,14 +3,12 @@ package com.example.jetpackcomposebase
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.jetpackcomposebase.base.LocaleManager
-import com.example.jetpackcomposebase.utils.DebugLog
 import com.example.jetpackcomposebase.utils.MyPreference
 import com.example.jetpackcomposebase.utils.PrefKey
 import dagger.hilt.android.AndroidEntryPoint
